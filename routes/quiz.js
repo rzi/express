@@ -4,15 +4,17 @@ const Quiz = require('../models/quiz');
 
 /* GET home page. */
 router.get('/', (req, res) => {
-  const show = !req.session.vote;
-
+ const show = !req.session.vote;
+//console.log(req.session.vote);
+  //new Quiz({title:'pytanie1',vote:0}).save();
   Quiz.find({}, (err, data) => {
+    console.log(data);
     let sum = 0;
     data.forEach((item) => {
       sum += item.vote;
     });
-
     res.render('quiz', { title: 'Quiz', data, show, sum });
+
   });
 });
 
